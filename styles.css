@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inconsolata', monospace;
 }
 
 body {
@@ -46,6 +47,16 @@ button {
   border-radius: 50%;
   font-size: 1.5rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:active {
+  transform: scale(.9);
 }
 
 .misc-button {
@@ -53,14 +64,26 @@ button {
   font-size: 1rem;
 }
 
+.misc-button:hover {
+  background-color: #f9faf8;
+}
+
 .number-button {
   color: white;
   background-color: #333;
 }
 
+.number-button:hover {
+  background-color: #696969;
+}
+
 .operator-button {
   color: white;
   background-color: #ff9f0a;
+}
+
+.operator-button:hover {
+  background-color: #ffc36c;
 }
 
 .row-container {
