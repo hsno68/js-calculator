@@ -34,7 +34,12 @@ function Calculator() {
 
   this.selectOperation = function(operator) {
     this.operator = operator;
-    this.previousOperand = this.currentOperand;
+    if (this.result) {
+      this.previousOperand = this.result;
+    }
+    else {
+      this.previousOperand = this.currentOperand;
+    }
     this.currentOperand = "";
     console.log(calculator);
   }
@@ -69,7 +74,13 @@ numberButtons.forEach(numberButton => {
 
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
-    calculator.selectOperation(operatorButton.textContent);
+    if (!calculator.previousOperand) {
+      calculator.selectOperation(operatorButton.textContent);
+    }
+    else {
+      calculator.performOperation(calculator.operator);
+      calculator.selectOperation(operatorButton.textContent);
+    }
   })
 });
 
