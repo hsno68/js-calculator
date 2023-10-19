@@ -5,10 +5,27 @@ const allClearButton = document.querySelector("[data-all-clear]");
 const previousOperandElement = document.querySelector("[data-previous-operand]");
 const currentOperandElement = document.querySelector("[data-current-operand]");
 
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a , b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  return a / b;
+}
+
 function Calculator() {
   this.previousOperand = "";
   this.currentOperand = "";
   this.operator = undefined;
+  this.result = undefined;
 
   this.appendNumber = function(number) {
     this.currentOperand += number;
@@ -19,6 +36,25 @@ function Calculator() {
     this.operator = operator;
     this.previousOperand = this.currentOperand;
     this.currentOperand = "";
+    console.log(calculator);
+  }
+
+  this.performOperation = function(operate) {
+    switch(this.operator) {
+      case "+":
+        operate = add;
+        break;
+      case "-":
+        operate = subtract;
+        break;
+      case "x":
+        operate = multiply;
+        break;
+      case "÷":
+        operate = divide;
+        break;  
+    }
+    this.result = operate(+this.previousOperand, +this.currentOperand);
     console.log(calculator);
   }
 }
@@ -35,4 +71,8 @@ operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     calculator.selectOperation(operatorButton.textContent);
   })
-})
+});
+
+equalsButton.addEventListener("click", () => {
+  calculator.performOperation(calculator.operator);
+});
