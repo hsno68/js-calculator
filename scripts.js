@@ -8,10 +8,18 @@ const currentOperandElement = document.querySelector("[data-current-operand]");
 function Calculator() {
   this.previousOperand = "";
   this.currentOperand = "";
+  this.operator = undefined;
 
   this.appendNumber = function(number) {
     this.currentOperand += number;
     console.log(calculator)
+  }
+
+  this.selectOperation = function(operator) {
+    this.operator = operator;
+    this.previousOperand = this.currentOperand;
+    this.currentOperand = "";
+    console.log(calculator);
   }
 }
 
@@ -22,3 +30,9 @@ numberButtons.forEach(numberButton => {
     calculator.appendNumber(numberButton.textContent);
   })
 });
+
+operatorButtons.forEach(operatorButton => {
+  operatorButton.addEventListener("click", () => {
+    calculator.selectOperation(operatorButton.textContent);
+  })
+})
