@@ -62,6 +62,14 @@ function Calculator() {
     this.result = operate(+this.previousOperand, +this.currentOperand);
     console.log(calculator);
   }
+
+  this.allClear = function() {
+    this.previousOperand = "";
+    this.currentOperand = "";
+    this.operator = undefined;
+    this.result = undefined;
+    console.log(calculator);
+  }
 }
 
 const calculator = new Calculator();
@@ -86,4 +94,8 @@ operatorButtons.forEach(operatorButton => {
 
 equalsButton.addEventListener("click", () => {
   calculator.performOperation();
+});
+
+allClearButton.addEventListener("click", () => {
+  calculator.allClear();
 });
