@@ -24,16 +24,15 @@ function divide(a, b) {
 function Calculator() {
   this.previousOperand = "";
   this.currentOperand = "";
-  this.operator = undefined;
-  this.result = undefined;
+  this.currentOperator = "";
 
   this.appendNumber = function(number) {
     this.currentOperand += number;
     console.log(calculator)
   }
 
-  this.selectOperation = function(operator) {
-    this.operator = operator;
+  this.selectOperator = function(operator) {
+    this.currentOperator = operator;
     if (this.result) {
       this.previousOperand = this.result;
     }
@@ -44,8 +43,9 @@ function Calculator() {
     console.log(calculator);
   }
 
-  this.performOperation = function() {
-    switch(this.operator) {
+  this.performOperation = function(operator) {
+    let operate;
+    switch(operator) {
       case "+":
         operate = add;
         break;
@@ -66,7 +66,7 @@ function Calculator() {
   this.allClear = function() {
     this.previousOperand = "";
     this.currentOperand = "";
-    this.operator = undefined;
+    this.currentOperator = "";
     this.result = undefined;
     console.log(calculator);
   }
@@ -76,24 +76,26 @@ const calculator = new Calculator();
 
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener("click", () => {
-    calculator.appendNumber(numberButton.textContent);
+    let selectedNumber = numberButton.textContent
+    calculator.appendNumber(selectedNumber);
   })
 });
 
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
-    if (!calculator.previousOperand) {
-      calculator.selectOperation(operatorButton.textContent);
+    let selectedOperator = operatorButton.textContent;
+    if (!calculator.currentOperator) {
+      calculator.selectOperator(selectedOperator);
     }
     else {
-      calculator.performOperation();
-      calculator.selectOperation(operatorButton.textContent);
+      calculator.performOperation(calculator.currentOperator);
+      calculator.selectOperator(selectedOperator);
     }
   })
 });
 
 equalsButton.addEventListener("click", () => {
-  calculator.performOperation();
+  calculator.performOperation(calculator.currentOperator);
 });
 
 allClearButton.addEventListener("click", () => {
