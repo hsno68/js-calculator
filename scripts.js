@@ -44,7 +44,7 @@ function Calculator() {
     console.log(calculator);
   }
 
-  this.performOperation = function(operate) {
+  this.performOperation = function() {
     switch(this.operator) {
       case "+":
         operate = add;
@@ -78,12 +78,12 @@ operatorButtons.forEach(operatorButton => {
       calculator.selectOperation(operatorButton.textContent);
     }
     else {
-      calculator.performOperation(calculator.operator);
+      calculator.performOperation();
       calculator.selectOperation(operatorButton.textContent);
     }
   })
 });
 
 equalsButton.addEventListener("click", () => {
-  calculator.performOperation(calculator.operator);
+  calculator.performOperation();
 });
