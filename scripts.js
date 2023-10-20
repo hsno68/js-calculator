@@ -21,14 +21,31 @@ function divide(a, b) {
   return a / b;
 }
 
-function Calculator() {
+function isValidOperator(character) {
+  switch(character) {
+    case "+":
+    case "-":
+    case "x":
+    case "÷":
+      return true;
+    default:
+      return false;
+  }
+}
+
+function Calculator(previousOperandElement, currentOperandElement) {
   this.previousOperand = "";
   this.currentOperand = "";
   this.currentOperator = "";
 
+  this.previousOperandElement = previousOperandElement;
+  this.currentOperandElement = currentOperandElement;
+
   this.appendNumber = function(number) {
+    if (this.result) {
+      this.result = "";
+    }
     this.currentOperand += number;
-    console.log(calculator)
   }
 
   this.selectOperator = function(operator) {
@@ -40,7 +57,6 @@ function Calculator() {
       this.previousOperand = this.currentOperand;
     }
     this.currentOperand = "";
-    console.log(calculator);
   }
 
   this.performOperation = function(operator) {
@@ -60,24 +76,43 @@ function Calculator() {
         break;  
     }
     this.result = operate(+this.previousOperand, +this.currentOperand);
-    console.log(calculator);
+  }
+
+  this.updateDisplay = function(character) {
+    if (isValidOperator(character) && this.previousOperand) {
+      this.previousOperandElement.textContent = "";
+      this.currentOperandElement.textContent = `${this.previousOperand} ${character}`;
+    }
+    else if (this.result) {
+      this.previousOperandElement.textContent = "";
+      this.currentOperandElement.textContent = this.result;
+    }
+    else if (this.currentOperand && this.previousOperand && this.currentOperator) {
+      this.previousOperandElement.textContent = `${this.previousOperand} ${this.currentOperator}`;
+      this.currentOperandElement.textContent = this.currentOperand;
+    }
+    else {
+      this.currentOperandElement.textContent = this.currentOperand;
+    }
   }
 
   this.allClear = function() {
     this.previousOperand = "";
     this.currentOperand = "";
     this.currentOperator = "";
-    this.result = undefined;
-    console.log(calculator);
+    this.previousOperandElement.textContent = "";
+    this.currentOperandElement.textContent = "";
+    this.result = "";
   }
 }
 
-const calculator = new Calculator();
+const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener("click", () => {
     let selectedNumber = numberButton.textContent
     calculator.appendNumber(selectedNumber);
+    calculator.updateDisplay();
   })
 });
 
@@ -86,16 +121,19 @@ operatorButtons.forEach(operatorButton => {
     let selectedOperator = operatorButton.textContent;
     if (!calculator.currentOperator) {
       calculator.selectOperator(selectedOperator);
+      calculator.updateDisplay(selectedOperator);
     }
     else {
       calculator.performOperation(calculator.currentOperator);
       calculator.selectOperator(selectedOperator);
+      calculator.updateDisplay(selectedOperator);
     }
   })
 });
 
 equalsButton.addEventListener("click", () => {
   calculator.performOperation(calculator.currentOperator);
+  calculator.updateDisplay();
 });
 
 allClearButton.addEventListener("click", () => {
