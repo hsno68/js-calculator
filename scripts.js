@@ -76,7 +76,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
         break;  
     }
     if (operate) {
-      this.currentOperand = operate(+this.previousOperand, +this.currentOperand);
+      this.currentOperand = operate(+this.previousOperand, +this.currentOperand).toString();
       this.previousOperand = "";
       this.currentOperator = "";
     }
@@ -108,10 +108,17 @@ function Calculator(previousOperandElement, currentOperandElement) {
     this.currentOperandElement.textContent = "";
   }
 
-  this.deleteNumber = function() {
-    let currentOperandArray = this.currentOperand.split("");
-    currentOperandArray.pop();
-    this.currentOperand = currentOperandArray.join("");
+  this.deleteCharacter = function() {
+    if (this.currentOperator) {
+      this.currentOperator = "";
+      this.currentOperand = this.previousOperand;
+      this.previousOperand = "";
+    }
+    else {
+      let currentOperandArray = this.currentOperand.split("");
+      currentOperandArray.pop();
+      this.currentOperand = currentOperandArray.join("");
+    }
   }
 }
 
@@ -150,8 +157,6 @@ allClearButton.addEventListener("click", () => {
 });
 
 deleteButton.addEventListener("click", () => {
-  if (calculator.currentOperand) {
-    calculator.deleteNumber();
-    calculator.updateDisplay();
-  }
+  calculator.deleteCharacter();
+  calculator.updateDisplay();
 });
