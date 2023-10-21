@@ -42,18 +42,12 @@ function Calculator(previousOperandElement, currentOperandElement) {
   this.currentOperandElement = currentOperandElement;
 
   this.appendNumber = function(number) {
-    if (this.result) {
-      this.result = "";
-    }
     this.currentOperand += number;
   }
 
   this.selectOperator = function(operator) {
     this.currentOperator = operator;
-    if (this.result) {
-      this.previousOperand = this.result;
-    }
-    else {
+    if (this.currentOperand) {
       this.previousOperand = this.currentOperand;
     }
     this.currentOperand = "";
@@ -75,7 +69,11 @@ function Calculator(previousOperandElement, currentOperandElement) {
         operate = divide;
         break;  
     }
-    this.result = operate(+this.previousOperand, +this.currentOperand);
+    if (operate) {
+      this.currentOperand = operate(+this.previousOperand, +this.currentOperand);
+      this.previousOperand = "";
+      this.currentOperator = "";
+    }
   }
 
   this.updateDisplay = function(character) {
@@ -83,12 +81,12 @@ function Calculator(previousOperandElement, currentOperandElement) {
       this.previousOperandElement.textContent = "";
       this.currentOperandElement.textContent = `${this.previousOperand} ${character}`;
     }
-    else if (this.result) {
-      this.previousOperandElement.textContent = "";
-      this.currentOperandElement.textContent = this.result;
-    }
     else if (this.currentOperand && this.previousOperand && this.currentOperator) {
       this.previousOperandElement.textContent = `${this.previousOperand} ${this.currentOperator}`;
+      this.currentOperandElement.textContent = this.currentOperand;
+    }
+    else if (!this.currentOperator) {
+      this.previousOperandElement.textContent = "";
       this.currentOperandElement.textContent = this.currentOperand;
     }
     else {
@@ -102,7 +100,6 @@ function Calculator(previousOperandElement, currentOperandElement) {
     this.currentOperator = "";
     this.previousOperandElement.textContent = "";
     this.currentOperandElement.textContent = "";
-    this.result = "";
   }
 }
 
@@ -119,12 +116,12 @@ numberButtons.forEach(numberButton => {
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     let selectedOperator = operatorButton.textContent;
-    if (!calculator.currentOperator) {
+    if (calculator.previousOperand && calculator.currentOperand && calculator.currentOperator) {
+      calculator.performOperation(calculator.currentOperator);
       calculator.selectOperator(selectedOperator);
       calculator.updateDisplay(selectedOperator);
     }
     else {
-      calculator.performOperation(calculator.currentOperator);
       calculator.selectOperator(selectedOperator);
       calculator.updateDisplay(selectedOperator);
     }
