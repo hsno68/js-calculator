@@ -42,7 +42,12 @@ function Calculator(previousOperandElement, currentOperandElement) {
   this.currentOperandElement = currentOperandElement;
 
   this.appendNumber = function(number) {
-    this.currentOperand += number;
+    if (number != ".") {
+      this.currentOperand += number;
+    }
+    else if (!this.currentOperand.includes(".")) {
+      this.currentOperand += number;
+    }
   }
 
   this.selectOperator = function(operator) {
