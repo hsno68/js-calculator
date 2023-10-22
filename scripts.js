@@ -43,6 +43,10 @@ function Calculator(previousOperandElement, currentOperandElement) {
   this.currentOperandElement = currentOperandElement;
 
   this.appendNumber = function(number) {
+    if (this.currentOperand === "0") {
+      this.currentOperand = "";
+    }
+
     if (number != ".") {
       this.currentOperand += number;
     }
@@ -53,6 +57,9 @@ function Calculator(previousOperandElement, currentOperandElement) {
 
   this.selectOperator = function(operator) {
     this.currentOperator = operator;
+    if (!this.currentOperand) {
+      this.previousOperand = "0";
+    }
     if (this.currentOperand) {
       this.previousOperand = this.currentOperand;
     }
