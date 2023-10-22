@@ -47,6 +47,10 @@ function Calculator(previousOperandElement, currentOperandElement) {
       this.currentOperand = "";
     }
 
+    if (number === "." && !this.currentOperand) {
+      this.currentOperand = "0";
+    }
+
     if (number != ".") {
       this.currentOperand += number;
     }
