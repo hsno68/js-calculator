@@ -85,7 +85,6 @@ function Calculator(previousOperandElement, currentOperandElement) {
     if (operate) {
       this.currentOperand = operate(+this.previousOperand, +this.currentOperand).toString();
       this.previousOperand = "";
-      this.currentOperator = "";
     }
   }
 
