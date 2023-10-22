@@ -98,11 +98,8 @@ function Calculator(previousOperandElement, currentOperandElement) {
       this.previousOperandElement.textContent = `${this.previousOperand} ${this.currentOperator}`;
       this.currentOperandElement.textContent = this.currentOperand;
     }
-    else if (!this.currentOperator) {
-      this.previousOperandElement.textContent = "";
-      this.currentOperandElement.textContent = this.currentOperand;
-    }
     else {
+      this.previousOperandElement.textContent = "";
       this.currentOperandElement.textContent = this.currentOperand;
     }
   }
@@ -144,13 +141,9 @@ operatorButtons.forEach(operatorButton => {
     let selectedOperator = operatorButton.textContent;
     if (calculator.previousOperand && calculator.currentOperand && calculator.currentOperator) {
       calculator.performOperation(calculator.currentOperator);
-      calculator.selectOperator(selectedOperator);
-      calculator.updateDisplay(selectedOperator);
     }
-    else {
-      calculator.selectOperator(selectedOperator);
-      calculator.updateDisplay(selectedOperator);
-    }
+    calculator.selectOperator(selectedOperator);
+    calculator.updateDisplay(selectedOperator);
   })
 });
 
