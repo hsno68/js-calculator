@@ -61,9 +61,10 @@ function Calculator(previousOperandElement, currentOperandElement) {
 
   this.selectOperator = function(operator) {
     this.currentOperator = operator;
-    if (!this.currentOperand) {
+    if (!this.previousOperand) {
       this.previousOperand = "0";
     }
+
     if (this.currentOperand) {
       this.previousOperand = this.currentOperand;
     }
