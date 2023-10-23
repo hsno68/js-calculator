@@ -85,12 +85,12 @@ function Calculator(previousOperandElement, currentOperandElement) {
         break;  
     }
     if (operate) {
-      let result = operate(+this.previousOperand, +this.currentOperand);
-      if (result.toString().length >= 14) {
-        this.currentOperand = result.toFixed(14).toString();
+      let result = operate(+this.previousOperand, +this.currentOperand).toString();
+      if (result.length >= 14 && result.includes(".")) {
+        this.currentOperand = (+result).toFixed(14).toString();
       }
       else {
-        this.currentOperand = result.toString();
+        this.currentOperand = result;
       }
       this.previousOperand = "";
     }
