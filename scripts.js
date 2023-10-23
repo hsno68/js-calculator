@@ -157,8 +157,8 @@ operatorButtons.forEach(operatorButton => {
 equalsButton.addEventListener("click", () => {
   if (calculator.previousOperand && calculator.currentOperand && calculator.currentOperator) {
     calculator.performOperation(calculator.currentOperator);
+    calculator.updateDisplay();
   }
-  calculator.updateDisplay();
 });
 
 allClearButton.addEventListener("click", () => {
