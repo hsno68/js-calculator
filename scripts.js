@@ -51,10 +51,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
       this.currentOperand = "0";
     }
 
-    if (number != ".") {
-      this.currentOperand += number;
-    }
-    else if (!this.currentOperand.includes(".")) {
+    if ((number != "." || !this.currentOperand.includes(".")) && this.currentOperand.length < 16) {
       this.currentOperand += number;
     }
   }
