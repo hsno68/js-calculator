@@ -97,7 +97,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
       this.previousOperandElement.textContent = "";
       this.currentOperandElement.textContent = `${this.previousOperand} ${character}`;
     }
-    else if (this.currentOperand && this.previousOperand && this.currentOperator) {
+    else if (this.previousOperand && this.currentOperator) {
       this.previousOperandElement.textContent = `${this.previousOperand} ${this.currentOperator}`;
       this.currentOperandElement.textContent = this.currentOperand;
     }
@@ -116,7 +116,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
   }
 
   this.deleteCharacter = function() {
-    if (this.currentOperator) {
+    if (this.previousOperand && !this.currentOperand && this.currentOperator) {
       this.currentOperator = "";
       this.currentOperand = this.previousOperand;
       this.previousOperand = "";
