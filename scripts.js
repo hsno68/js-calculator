@@ -87,7 +87,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
     if (operate) {
       let result = operate(+this.previousOperand, +this.currentOperand).toString();
       if (result.length >= 14 && result.includes(".")) {
-        this.currentOperand = (+result).toFixed(14).toString();
+        this.currentOperand = (+result).toFixed(6).toString();
       }
       else {
         this.currentOperand = result;
