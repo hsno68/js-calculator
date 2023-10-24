@@ -26,10 +26,14 @@ body {
 
 .calculator-display {
   height: 100px;
+  width: 220px;
+  align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: end;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .previous-operand-display {
