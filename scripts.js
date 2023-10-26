@@ -60,9 +60,9 @@ function Calculator(previousOperandElement, currentOperandElement) {
     this.currentOperand = "";
   }
 
-  this.performOperation = function(operator) {
+  this.performOperation = function() {
     let operate;
-    switch(operator) {
+    switch(this.currentOperator) {
       case "+":
         operate = add;
         break;
@@ -157,7 +157,7 @@ operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     let selectedOperator = operatorButton.textContent;
     if (calculator.canPerformOperation()) {
-      calculator.performOperation(calculator.currentOperator);
+      calculator.performOperation();
     }
     calculator.selectOperator(selectedOperator);
     calculator.updateDisplay(selectedOperator);
@@ -166,7 +166,7 @@ operatorButtons.forEach(operatorButton => {
 
 equalsButton.addEventListener("click", () => {
   if (calculator.canPerformOperation()) {
-    calculator.performOperation(calculator.currentOperator);
+    calculator.performOperation();
     calculator.updateDisplay();
   }
 });
