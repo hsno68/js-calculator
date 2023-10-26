@@ -127,7 +127,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
   //Checks if operands and operators are valid (not undefined/falsy)
   //All operands and results are returned as strings, so 0 will always be "0"
   this.canPerformOperation = function() {
-    return calculator.previousOperand && calculator.currentOperand && calculator.currentOperator;
+    return this.previousOperand && this.currentOperand && this.currentOperator;
   }
 
   this.isOperator = function(operator) {
