@@ -75,7 +75,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
         break;
       case "÷":
         operate = divide;
-        break;  
+        break;
     }
     //Calculates the result and sets the result as the current operand, ready for another calculation
     if (operate) {
@@ -182,4 +182,4 @@ calculatorButtons.forEach(calculatorButton => {
     let selectedButtonText = calculatorButton.textContent;
     calculator.updateDisplay(selectedButtonText);
   })
-})
+});
