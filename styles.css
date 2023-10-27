@@ -53,15 +53,15 @@ button {
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  transform: scale(1.1);
+  transform: translateY(-0.3rem);
 }
 
 button:active {
-  transform: scale(.9);
+  transform: translateY(0rem);
 }
 
 .misc-button {
