@@ -183,3 +183,35 @@ calculatorButtons.forEach(calculatorButton => {
     calculator.updateDisplay(selectedButtonText);
   })
 });
+
+document.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  const pressedKeyElement = document.querySelector(`[data="${e.key}"]`)
+  if (!pressedKeyElement) {
+    return;
+  }
+
+  const pressedKey = pressedKeyElement.textContent;
+  switch(true) {
+    case (0 <= pressedKey && pressedKey <= 9) || pressedKey === ".":
+      calculator.appendNumber(pressedKey);
+      break;
+    case calculator.isOperator(pressedKey):
+      if (calculator.canPerformOperation()) {
+        calculator.performOperation();
+      }
+      calculator.selectOperator(pressedKey);
+      break;
+    case pressedKey === "=":
+      if (calculator.canPerformOperation()) {
+        calculator.performOperation();
+      }
+      break;
+    case pressedKey === "AC":
+      calculator.allClear();
+    case pressedKey === "DEL":
+      calculator.deleteCharacter();
+      break;
+  }
+  calculator.updateDisplay(pressedKey);
+});
