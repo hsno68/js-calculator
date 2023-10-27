@@ -96,7 +96,6 @@ button:active {
   gap: 0.5rem;
 }
 
-.misc-button.all-clear,
 .number-button.zero {
   flex: 1;
   border-radius: 25px;

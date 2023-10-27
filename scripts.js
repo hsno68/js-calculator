@@ -3,6 +3,7 @@ const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
 const allClearButton = document.querySelector("[data-all-clear]");
 const deleteButton = document.querySelector("[data-delete]");
+const invertSignButton = document.querySelector("[data-invert-sign]");
 const calculatorButtons = document.querySelectorAll(".calculator button");
 const previousOperandElement = document.querySelector("[data-previous-operand]");
 const currentOperandElement = document.querySelector("[data-current-operand]");
@@ -125,6 +126,15 @@ function Calculator(previousOperandElement, currentOperandElement) {
     }
   }
 
+  this.invertSign = function() {
+    if (this.currentOperand.includes("-")) {
+      this.currentOperand = this.currentOperand.slice(1);
+    }
+    else {
+      this.currentOperand = `-${this.currentOperand}`;
+    }
+  }
+
   //Checks if operands and operators are valid (not undefined/falsy)
   //All operands and results are returned as strings, so 0 will always be "0"
   this.canPerformOperation = function() {
@@ -175,6 +185,10 @@ allClearButton.addEventListener("click", () => {
 
 deleteButton.addEventListener("click", () => {
   calculator.deleteCharacter();
+});
+
+invertSignButton.addEventListener("click", () => {
+  calculator.invertSign();
 });
 
 calculatorButtons.forEach(calculatorButton => {
