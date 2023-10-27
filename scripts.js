@@ -185,8 +185,7 @@ calculatorButtons.forEach(calculatorButton => {
 });
 
 document.addEventListener("keydown", (e) => {
-  e.preventDefault();
-  const pressedKeyElement = document.querySelector(`[data="${e.key}"]`)
+  const pressedKeyElement = document.querySelector(`[data="${e.key}"]`);
   if (!pressedKeyElement) {
     return;
   }
