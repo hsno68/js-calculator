@@ -222,8 +222,12 @@ document.addEventListener("keydown", (e) => {
       break;
     case pressedKey === "AC":
       calculator.allClear();
+      break;
     case pressedKey === "DEL":
       calculator.deleteCharacter();
+      break;
+    case pressedKey === "+/-":
+      calculator.invertSign();
       break;
   }
   calculator.updateDisplay(pressedKey);
