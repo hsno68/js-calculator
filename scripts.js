@@ -4,7 +4,7 @@ const equalsButton = document.querySelector("[data-equals]");
 const allClearButton = document.querySelector("[data-all-clear]");
 const deleteButton = document.querySelector("[data-delete]");
 const invertSignButton = document.querySelector("[data-invert-sign]");
-const calculatorButtons = document.querySelectorAll(".calculator button");
+const calculatorButtons = document.querySelectorAll("[data]");
 const previousOperandElement = document.querySelector("[data-previous-operand]");
 const currentOperandElement = document.querySelector("[data-current-operand]");
 
