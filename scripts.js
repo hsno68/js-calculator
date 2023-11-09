@@ -156,6 +156,7 @@ function Calculator(previousOperandElement, currentOperandElement) {
 
 const calculator = new Calculator(previousOperandElement, currentOperandElement);
 
+//Numbers
 numberButtons.forEach(numberButton => {
   numberButton.addEventListener("click", () => {
     let selectedNumber = numberButton.textContent
@@ -163,6 +164,7 @@ numberButtons.forEach(numberButton => {
   })
 });
 
+//Operators
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener("click", () => {
     let selectedOperator = operatorButton.textContent;
@@ -173,24 +175,29 @@ operatorButtons.forEach(operatorButton => {
   })
 });
 
+//Equals
 equalsButton.addEventListener("click", () => {
   if (calculator.canPerformOperation()) {
     calculator.performOperation();
   }
 });
 
+//All clear
 allClearButton.addEventListener("click", () => {
   calculator.allClear();
 });
 
+//Delete
 deleteButton.addEventListener("click", () => {
   calculator.deleteCharacter();
 });
 
+//Invert
 invertSignButton.addEventListener("click", () => {
   calculator.invertSign();
 });
 
+//Updates display
 calculatorButtons.forEach(calculatorButton => {
   calculatorButton.addEventListener("click", () => {
     let selectedButtonText = calculatorButton.textContent;
@@ -198,6 +205,7 @@ calculatorButtons.forEach(calculatorButton => {
   })
 });
 
+//Keyboard support
 document.addEventListener("keydown", (e) => {
   const pressedKeyElement = document.querySelector(`[data="${e.key}"]`);
   if (!pressedKeyElement) {
