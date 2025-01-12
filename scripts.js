@@ -16,7 +16,7 @@ function subtract(firstOperand, secondOperand) {
   return firstOperand - secondOperand;
 }
 
-function multiply(firstOperand , secondOperand) {
+function multiply(firstOperand, secondOperand) {
   return firstOperand * secondOperand;
 }
 
